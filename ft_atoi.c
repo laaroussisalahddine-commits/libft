@@ -1,3 +1,4 @@
+#include"libft.h"
 
 int ft_atoi(const char *str)
 {
@@ -10,10 +11,10 @@ int ft_atoi(const char *str)
         i++;
 
     sign = 1;
-    while(str[i] == '-' || str[i] == '+')
+    if (str[i] == '-' || str[i] == '+')
     {
         if(str[i] == '-')
-            sign *= -1;
+            sign = -1;
         i++;
     }
 

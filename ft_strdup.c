@@ -1,13 +1,4 @@
-#include<unistd.h>
-#include<stdlib.h>
-
-int ft_strlen(const char *str)
-{
-    int len = 0;
-    while(str[len])
-        len++;
-    return(len);
-}
+#include"libft.h"
 
 char *ft_strdup(const char *s1)
 {
