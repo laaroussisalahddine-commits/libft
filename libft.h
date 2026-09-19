@@ -43,4 +43,10 @@ void ft_putstr_fd(char const *s ,int fd);
 void ft_putendl_fd(char const *s, int fd);
 void ft_putnbr_fd(int n, int fd);
 
+void    *ft_memalloc(size_t size);
+void    ft_memdel(void **ap);
+void    ft_strclr(char *s);
+void    ft_strdel(char **as);
+char    *ft_strnew(size_t size);
+
 #endif
