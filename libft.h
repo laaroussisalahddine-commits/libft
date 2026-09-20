@@ -32,6 +32,8 @@ int ft_strncmp(const char *s1, const char *s2, size_t n);
 char *ft_strncpy(char *dst, const char *src, size_t len);
 char *ft_strrchr(const char *s, int c);
 char *ft_strstr(const char *haystack, const char *needle);
+void	*ft_memmove(void *dst, const void *src, size_t len);
+char	*ft_strnstr(const char *haystack, const char *needle, size_t len);
 
 //part_2:
 void ft_putchar(char c);
@@ -58,6 +60,8 @@ char *ft_strsub(char const *s, unsigned int start, size_t len);
 char    *ft_itoa(int n);
 char    *ft_strjoin(char const *s1, char const*s2);
 char    *ft_strtrim(char const *s);
+void	ft_striter(char *s, void (*f)(char *));
+char	**ft_strsplit(char const *s, char c);
 
 
 #endif
