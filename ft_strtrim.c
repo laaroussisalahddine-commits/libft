@@ -18,6 +18,8 @@ char    *ft_strtrim(char const *s)
         end--;
 
     fresh = ft_strnew(end - start);
+    if(!fresh)
+        return(NULL);
     i = 0;
     while(start < end)
     {

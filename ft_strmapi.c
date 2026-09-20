@@ -6,6 +6,8 @@ char *ft_strmapi(char const *s ,char (*f) (unsigned int , char))
     char *new;
 
     new = ft_strnew(ft_strlen(s));
+    if(!new)
+        return(NULL);
     
     i = 0;
     while(s[i])

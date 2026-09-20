@@ -4,7 +4,7 @@ int ft_atoi(const char *str)
 {
     int i;
     int sign;
-    int final_number;
+    long final_number;
 
     i = 0;
     while((str[i] >= 9 && str[i] <= 13 ) || str[i] == 32)
@@ -25,5 +25,5 @@ int ft_atoi(const char *str)
         i++;
     }
 
-    return(final_number * sign);
+    return((int)(final_number * sign));
 }
