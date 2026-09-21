@@ -6,7 +6,7 @@
 //free_string;
 // append;
 
-int count_word(char *s,char c)
+int count_word(char const *s,char c)
 {
     int i;
     int len;
@@ -49,7 +49,7 @@ int count_string(char const *s, char c)
     return(count);
 }
 
-char *ft_skip(char *s,char c)
+char *ft_skip(char const *s,char c)
 {
     int i;
 
@@ -74,7 +74,7 @@ void free_split(char **arr,int j)
     free(arr);
 }
 
-void ft_append(char **arr, char **current, char c, int j)
+int ft_append(char **arr, char const **current, char c, int j)
 {
     int i;
     int len;
@@ -84,7 +84,7 @@ void ft_append(char **arr, char **current, char c, int j)
 
     arr[j] = ft_strnew(len);
     if (!arr[j])
-        return;
+        return(0);
 
     i = 0;
     while (i < len)
@@ -94,11 +94,12 @@ void ft_append(char **arr, char **current, char c, int j)
     }
 
     *current += len;
+    return(1);
 }
 char **ft_strsplit(char const *s, char c)
 {
     char **arr;
-    char *current;
+    char const *current;
     int count;
     int j;
 
@@ -107,11 +108,15 @@ char **ft_strsplit(char const *s, char c)
     if(!arr)
         return(NULL);
 
-    current = (char *)s;
+    current = s;
     j = 0;
     while (j < count)
     {
-        ft_append(arr,&current,c,j);
+        if (!ft_append(arr, &current, c, j))
+        {
+            free_split(arr, j);
+            return (NULL);
+        }
         j++;
     }
     arr[j] = NULL;

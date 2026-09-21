@@ -2,16 +2,17 @@
 
 void *ft_memcpy(void *dst, const void *src, size_t n)
 {
-    const char *str;
-    char *dest;
+    const unsigned char *str;
+    unsigned char *dest;
+    size_t i;
 
-    str = (const char *)src;
-    dest = (char *)dst;
-    
-    while(n > 0)
+    str = (const unsigned char *)src;
+    dest = (unsigned char *)dst;
+    i = 0;
+    while(i < n)
     {
-        dest[n - 1] = str[n - 1];
-        n--;
+        dest[i] = str[i];
+        i++;
     }
     return(dest);
 }
