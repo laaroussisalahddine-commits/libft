@@ -52,13 +52,14 @@ int count_string(char const *s, char c)
 char *ft_skip(char const *s,char c)
 {
     int i;
-
+    char *str;
+    str = (char *)s;
     i = 0;
 
-    while(s[i] && s[i] == c)
+    while(str[i] && str[i] == c)
         i++;
     
-    return(s + i);
+    return(str + i);
 }
 
 void free_split(char **arr,int j)
