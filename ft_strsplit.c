@@ -44,7 +44,8 @@ int count_string(char const *s, char c)
             while(s[i] && s[i] != c)
                 i++;
         }
-        i++;
+        else 
+            i++;
     }
     return(count);
 }
