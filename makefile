@@ -11,7 +11,9 @@ FILES = ft_atoi ft_bzero ft_isalnum ft_isalpha ft_isascii ft_isdigit ft_isprint 
 		ft_strcmp ft_strcpy ft_strdel ft_strdup ft_strequ ft_striter ft_striteri \
 		ft_strjoin ft_strlcat ft_strlen ft_strmap ft_strmapi ft_strncat ft_strncmp \
 		ft_strncpy ft_strnequ ft_strnew ft_strnstr ft_strrchr ft_strsplit ft_strstr \
-		ft_strsub ft_strtrim ft_tolower ft_toupper 
+		ft_strsub ft_strtrim ft_tolower ft_toupper \
+		ft_lstnew_bonus ft_lstadd_front_bonus ft_lstsize_bonus ft_lstlast_bonus \
+		ft_lstadd_back_bonus
 
 
 SRC = $(FILES:=.c)
