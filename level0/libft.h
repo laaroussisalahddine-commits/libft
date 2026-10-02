@@ -17,6 +17,8 @@
 # include <string.h>
 # include <stdlib.h>
 # include <stdio.h>
+#include <limits.h>
+#include <stdint.h>
 
 // ----------Part 1------------ 
 //Character classification 
