@@ -1,23 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlen.c                                        :+:      :+:    :+:   */
+/*   ft_isalpha.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: slaarous <slaarous@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/10/12 18:49:19 by slaarous          #+#    #+#             */
-/*   Updated: 2026/10/12 18:52:20 by slaarous         ###   ########.fr       */
+/*   Created: 2026/10/12 18:15:20 by slaarous          #+#    #+#             */
+/*   Updated: 2026/10/12 18:46:06 by slaarous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "level0/libft.h"
+#include "libft.h"
 
-size_t	ft_strlen(const char *s)
+int	ft_isalpha(int c)
 {
-	size_t	i;
-
-	i = 0;
-	while (s[i])
-		i++;
-	return (i);
+	if ((c >= 'a' && c <= 'z') 
+		|| (c >= 'A' && c <= 'Z')) 
+		return (1);
+	return (0);
 }

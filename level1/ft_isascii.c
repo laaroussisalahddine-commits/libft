@@ -1,18 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_bzero.c                                         :+:      :+:    :+:   */
+/*   ft_isascii.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: slaarous <slaarous@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/10/12 19:25:52 by slaarous          #+#    #+#             */
-/*   Updated: 2026/10/12 19:44:13 by slaarous         ###   ########.fr       */
+/*   Created: 2026/10/12 18:31:50 by slaarous          #+#    #+#             */
+/*   Updated: 2026/10/12 18:47:47 by slaarous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <string.h>
+#include "libft.h"
 
-void	ft_bzero(void *s, size_t n)
+int	ft_isascii(int c)
 {
-	ft_memset(s, 0, n);
+	if (c >= 0 && c <= 127)
+		return (1);
+	return (0);
 }
