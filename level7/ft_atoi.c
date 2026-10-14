@@ -6,7 +6,7 @@
 /*   By: slaarous <slaarous@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/13 21:44:25 by slaarous          #+#    #+#             */
-/*   Updated: 2026/10/13 21:46:06 by slaarous         ###   ########.fr       */
+/*   Updated: 2026/10/14 21:43:33 by slaarous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,5 +31,6 @@ int	ft_atoi(const char *str)
 	final_number = 0;
 	while (str[i] >= '0' && str[i] <= '9')
 		final_number = final_number * 10 + (str[i++] - '0');
+	// handle cases long max and min 
 	return ((int)(final_number * sign));
 }

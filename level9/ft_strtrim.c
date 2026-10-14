@@ -6,94 +6,63 @@
 /*   By: slaarous <slaarous@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/13 20:57:00 by slaarous          #+#    #+#             */
-/*   Updated: 2026/10/13 22:44:08 by slaarous         ###   ########.fr       */
+/*   Updated: 2026/10/14 11:34:29 by slaarous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int end_of_string(char *str, char *set)
+int	end_of_string(const char *str, const char *set)
 {
-    int i;
-    int j;
+	int	i;
 
-    i = ft_strlen(str) - 1;
-	j = ft_strlen(set) - 1;
-    while (i > 0)
-    {
-		j = 0;
-        while (j > 0)
-			j--;
-        i--;
-    }
-    return(i);
+	i = ft_strlen(str);
+	while (i > 0 && ft_strchr(set, str[i - 1]))
+		i--;
+	return (i);
 }
 
-int start_of_string(char *str, char *set)
+int	start_of_string(const char *str, const char *set)
 {
-    int i;
-    int j;
+	int	i;
 
-    i = 0;
-    while (str[i] && str[i] == set[i])
-    {
-        j = 0;
-        while (set[j] && str[i] == set[j])
-			j++;
-        i++;
-    }
-    return(i);
+	i = 0;
+	while (str[i] && ft_strchr(set, str[i]))
+		i++;
+	return (i);
 }
 
-int total_set(char *str , char *set)
+char	*ft_strtrim(char const *s1, char const *set)
 {
-    int		i;
-    int		j;
-    int	count;
-
-	count = 0;
-	i = 0; 
-    while (str[i])
-    {
-        j = 0;
-        while (set[j])
-        {
-            if (str[i] == set[j])
-            {
-                count++;
-                break;
-            }    
-            j++;
-        }    
-        i++;
-    }
-    return(count);
-}    
-
-
-char *ft_strtrim(char const *s1, char const *set)
-{
-    int total;
-    int start;
-    int end;
-    int i;
-    char *new;
+    int	total;
+    int	start;
+    int	end;
+    int	i;
+    char	*new;
     
-    if (!s1 || !set)
-        return (NULL);
-    start = start_of_string((char *)s1, (char *)set);
-	end = end_of_string((char *)s1, (char *)set);
-    total = ft_strlen(s1) - total_set((char *)s1, (char *)set) ;
-    new = (char *)malloc(total + 1);
-    if (!new)
-        return(NULL);
-    i = 0;
-    while (start < end)
-    {
-        new[i] = s1[start];
-        i++;
-        start++;
-    }    
-    new[i] = 0;
-    return (new);
+	start = start_of_string(s1,set);
+	end = end_of_string(s1,set);
+	if (!s1)
+	{
+		new = malloc(1);
+		if (!new)
+			return(NULL);
+		new[0] = 0;
+	}
+	if (end <= start)
+        total = 0;
+	else
+		total = end - start;
+	new = (char *)malloc(total + 1);
+	if (!new)
+		return(NULL);
+	i = 0;
+	while (start <= end)
+	{
+		new[i] = s1[start];
+		i++;
+		start++;	
+	}
+	new[i] = 0;
+	return (new);
 }

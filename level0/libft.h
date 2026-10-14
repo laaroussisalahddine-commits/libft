@@ -6,7 +6,7 @@
 /*   By: slaarous <slaarous@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/13 21:58:11 by slaarous          #+#    #+#             */
-/*   Updated: 2026/10/13 22:08:52 by slaarous         ###   ########.fr       */
+/*   Updated: 2026/10/14 23:49:36 by slaarous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,5 +60,16 @@ char	*ft_strdup(const char *s);
 char	*ft_substr(char const *s, unsigned int start, size_t len);
 char	*ft_strtrim(char const *s1, char const *set);
 char	*ft_strjoin(char const *s1, char const *s2);
+void	ft_striteri(char *s, void (*f)(unsigned int , char *str));
+char *ft_strmapi(char const *s, char (*f)(unsigned int, char));
 
+
+//convertion to string 
+char	*ft_itoa(int n);
+
+//file descriptor 
+void	ft_putchar_fd(char c, int fd);
+void	ft_putnbr_fd(int n, int fd);
+void	ft_putstr_fd(char *s, int fd);
+void	ft_putendl_fd(char *s, int fd);
 #endif
