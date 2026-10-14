@@ -1,26 +1,35 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_atoi.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: slaarous <slaarous@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/10/13 21:44:25 by slaarous          #+#    #+#             */
+/*   Updated: 2026/10/13 21:46:06 by slaarous         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "libft.h"
 
-int ft_atoi(const char *str)
+int	ft_atoi(const char *str)
 {
-    int i;
-    int sign;
-    long final_number;
+	int		i;
+	int		sign;
+	long	final_number;
 
-    i = 0;
-    while((str[i] >= 9 && str[i] <= 13) || str[i] == 32)
-        i++;
-    
-    sign = 1;
-    if(str[i] == '-' || str[i] == '+')
-    {
-        if (str[i] == '-')
-            sign = -1;
-        i++;
-    }   
-    
-    final_number = 0;
-    while(str[i] >= '0' && str[i] <= '9')
-        final_number = final_number * 10 + (str[i++] - '0');
-    
-    return((int)(final_number * sign));
+	i = 0;
+	while ((str[i] >= 9 && str[i] <= 13) || str[i] == 32)
+		i++;
+	sign = 1;
+	if (str[i] == '-' || str[i] == '+')
+	{
+		if (str[i] == '-')
+			sign = -1;
+		i++;
+	}
+	final_number = 0;
+	while (str[i] >= '0' && str[i] <= '9')
+		final_number = final_number * 10 + (str[i++] - '0');
+	return ((int)(final_number * sign));
 }
