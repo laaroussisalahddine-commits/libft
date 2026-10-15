@@ -17,7 +17,7 @@ FIlES = level1/ft_isalnum level1/ft_isalpha level1/ft_isascii level1/ft_isdigit 
 
 OBJ = $(FIlES:=.o)
 
-.PHONY: all clean fclean re
+.PHONY : all clean fclean re 
 
 all : $(LIB)
 $(LIB) : $(OBJ)
@@ -27,8 +27,6 @@ $(LIB) : $(OBJ)
 	
 clean : 
 	$(RM) $(OBJ)
-
-
 fclean : clean
 	$(RM) $(LIB)
 

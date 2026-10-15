@@ -6,7 +6,7 @@
 /*   By: slaarous <slaarous@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/13 21:58:11 by slaarous          #+#    #+#             */
-/*   Updated: 2026/10/14 23:49:36 by slaarous         ###   ########.fr       */
+/*   Updated: 2026/10/15 21:02:29 by slaarous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,4 +72,23 @@ void	ft_putchar_fd(char c, int fd);
 void	ft_putnbr_fd(int n, int fd);
 void	ft_putstr_fd(char *s, int fd);
 void	ft_putendl_fd(char *s, int fd);
+
+//----------------parte 3--------------------
+// typedef :
+
+typedef struct s_list
+{
+	void	*content;
+	struct	s_list *next;
+} 	
+t_list;
+
+//      linkd list :
+t_list			*ft_lstnew(void	*content);
+void			ft_lstadd_front(t_list **lst, t_list *new);
+unsigned int	ft_lstsize(t_list *lst);
+t_list			*ft_lstlast(t_list *lst);
+void			ft_lstadd_back(t_list **lst, t_list *new);
+void			ft_lstdelone(t_list *lst, void (*del)(void *));
+
 #endif
