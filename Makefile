@@ -12,9 +12,11 @@ FIlES = level1/ft_isalnum level1/ft_isalpha level1/ft_isascii level1/ft_isdigit 
 		level6/ft_strlcpy level6/ft_strlcat \
 		level7/ft_atoi level7/ft_tolower level7/ft_toupper \
 		level8/ft_calloc level8/ft_strdup \
-		level9/ft_strjoin level9/ft_strtrim level9/ft_substr level9/ft_itoa \
+		level9/ft_strjoin level9/ft_strtrim level9/ft_substr level9/ft_itoa level9/ft_split \
 		level10/ft_putchar_fd level10/ft_putnbr_fd level10/ft_putendl_fd level10/ft_putstr_fd \
-			level10/ft_striteri level10/ft_strmapi 
+			level10/ft_striteri level10/ft_strmapi \
+		linkd_list/ft_lstadd_back linkd_list/ft_lstadd_front linkd_list/ft_lstclear linkd_list/ft_lstdelone \
+		linkd_list/ft_lstiter linkd_list/ft_lstlast linkd_list/ft_lstmap linkd_list/ft_lstnew linkd_list/ft_lstsize
 
 OBJ = $(FIlES:=.o)
 

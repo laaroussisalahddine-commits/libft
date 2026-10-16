@@ -6,85 +6,117 @@
 /*   By: slaarous <slaarous@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/15 13:42:20 by slaarous          #+#    #+#             */
-/*   Updated: 2026/10/15 15:10:38 by slaarous         ###   ########.fr       */
+/*   Updated: 2026/10/17 00:44:18 by slaarous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static int	count_word(char *str, char c)
-{
-	int	i;
-	int	len;
+static char	*copy_word(char	const *s, int start, int len);
+static int len_word(char const *s, char c, int start);
+static int	count_word(char const *s, char c);
+static void	free_split(char **arr, int j);
 
+char	**ft_split(char const *s, char c)
+{
+	char		**arr;
+	int			count;
+	int			i;
+	int 		pos;
+	int			len;
+	int			start;
+
+	count = count_word (s, c);
+	arr = (char	**)malloc((count + 1) * sizeof(char	*));
+	if (!arr)
+		return (NULL);
 	i = 0;
+	pos = 0;
 	len = 0;
-	while (str[i])
+	while (i < count)
 	{
-		if (str[i] != c)
+		while (s[pos] && s[pos] == c)
+			pos++;
+		start = pos;
+		len = len_word(s, c, start);
+		arr[i] = copy_word(s, c, len);
+		if (!arr)
 		{
-			while (str[i] && str[i] != c)
-			{
-				len++;
-				i++;
-			}
-			break;
+			free_split(arr, i);
+			return (NULL);
 		}
+		pos = ft_strlen(arr[i]);
 		i++;
 	}
-	return (i);
+	arr[i] = NULL;
+	return (arr);
 }
 
-static int	count_string(char *str, char c)
+static int	count_word(char const *s, char c)
 {
 	int	i;
 	int	count;
-	
-	count = 0;
+
 	i = 0;
-	while (str[i])
+	count = 0;
+	while (s[i])
 	{
-		if (str[i] == c)
+		if (s[i] != c)
+		{
 			count++;
-		i++;
+			while(s[i] && s[i] != c)
+				i++;
+		}
+		else
+			i++;
 	}
 	return (count);
 }
 
-static	char ft_skip(char const *s, char c)
+static int len_word(char const *s, char c, int start)
 {
-	int		i;
-	char	*str;
-
-	str = (char const *)s;
-	i = 0;
-
-	while (str[i] && str[i] != c )
-		i++;
-	return (str + i);
-}
-
-static int append (char *str, char *current
-
-char	**ft_split(char const *s, char c)
-{
-	char	**arr;
-	int		count;
-	char	*current;
-
-	arr = (char **)malloc((count + 1) * sizeof(char *));
-	if (!arr)
-		return (NULL);
-	while (s[i])
-	{
-		j = 0;
-		while (j < 
-
-}
-
-
-int main ()
-{
+	int	len;
 	
+	len = 0;
+	while (s[start] && s[start] != c)
+	{
+		len++;
+		start++;
+	}
+	return (len);
+}
+
+static char	*copy_word(char	const *s, int start, int len)
+{
+	char	*new;
+	int		i;
+
+	if (!s)
+		return (NULL);
+	new = (char	*)malloc(len + 1);
+	if (!new)
+		return (NULL);
+	i = 0;
+	while (i < len)
+	{
+		new[i] = s[start];
+		i++;
+		start++;
+	}
+	new[i] = '\0';
+	return (new);
+}
+
+static void	free_split(char **arr, int j)
+{
+	int	i;
+	
+	i = 0;
+	while (i < j)
+	{
+		free(arr[i]);
+		i++; 
+	}
+	free(arr);
 }
 
