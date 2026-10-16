@@ -9,6 +9,7 @@ FIlES = level1/ft_isalnum level1/ft_isalpha level1/ft_isascii level1/ft_isdigit 
 		level3/ft_memcpy \
 		level4/ft_memchr level4/ft_memcmp \
 		level5/ft_strchr level5/ft_strncmp level5/ft_strnstr level5/ft_strrchr \
+		level6/ft_strlcpy level6/ft_strlcat \
 		level7/ft_atoi level7/ft_tolower level7/ft_toupper \
 		level8/ft_calloc level8/ft_strdup \
 		level9/ft_strjoin level9/ft_strtrim level9/ft_substr level9/ft_itoa \
@@ -22,15 +23,19 @@ OBJ = $(FIlES:=.o)
 all : $(LIB)
 $(LIB) : $(OBJ)
 	$(AR) $(LIB) $(OBJ)
+
 %.o:%.c 
 	$(CC) $(FLAGS) -c $< -o $@
 	
 clean : 
 	$(RM) $(OBJ)
+
 fclean : clean
 	$(RM) $(LIB)
 
 re: fclean all
 
+run :
+	$(CC) $(FLAGS) main.c libft.a -o test && ./test
 
 
