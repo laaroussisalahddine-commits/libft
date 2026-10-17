@@ -6,7 +6,7 @@
 /*   By: slaarous <slaarous@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/15 13:42:20 by slaarous          #+#    #+#             */
-/*   Updated: 2026/10/17 15:51:51 by slaarous         ###   ########.fr       */
+/*   Updated: 2026/10/17 19:40:45 by slaarous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 static int	len_word(char const *s, char c, int start);
 static int	count_word(char const *s, char c);
 static void	free_split(char **arr, int j);
+static int	append(char const *s, char **arr, int pos, int len);
 
 char	**ft_split(char const *s, char c)
 {
@@ -35,8 +36,7 @@ char	**ft_split(char const *s, char c)
 		while (s[pos] && s[pos] == c)
 			pos++;
 		len = len_word(s, c, pos);
-		arr[i] = ft_substr(s, pos, len);
-		if (!arr)
+		if (!append(s, arr, pos, len))
 		{
 			free_split(arr, i);
 			return (NULL);
@@ -46,6 +46,14 @@ char	**ft_split(char const *s, char c)
 	}
 	arr[i] = NULL;
 	return (arr);
+}
+
+static int	append(char const *s, char **arr, int pos, int len)
+{
+	arr[i] = ft_substr(s, pos, len);
+	if (!arr[i])
+		return (0);
+	return (1);
 }
 
 static int	count_word(char const *s, char c)
