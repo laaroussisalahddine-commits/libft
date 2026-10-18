@@ -6,7 +6,7 @@
 /*   By: slaarous <slaarous@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/15 13:42:20 by slaarous          #+#    #+#             */
-/*   Updated: 2026/10/17 15:51:51 by slaarous         ###   ########.fr       */
+/*   Updated: 2026/10/18 21:37:49 by slaarous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ char	**ft_split(char const *s, char c)
 			pos++;
 		len = len_word(s, c, pos);
 		arr[i] = ft_substr(s, pos, len);
-		if (!arr)
+		if (!arr[i])
 		{
 			free_split(arr, i);
 			return (NULL);
@@ -63,8 +63,7 @@ static int	count_word(char const *s, char c)
 			while (s[i] && s[i] != c)
 				i++;
 		}
-		else
-			i++;
+		i++;
 	}
 	return (count);
 }

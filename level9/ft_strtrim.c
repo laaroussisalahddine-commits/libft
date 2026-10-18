@@ -6,7 +6,7 @@
 /*   By: slaarous <slaarous@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/13 20:57:00 by slaarous          #+#    #+#             */
-/*   Updated: 2026/10/14 11:34:29 by slaarous         ###   ########.fr       */
+/*   Updated: 2026/10/18 23:31:55 by slaarous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,35 +34,25 @@ int	start_of_string(const char *str, const char *set)
 
 char	*ft_strtrim(char const *s1, char const *set)
 {
-    int	total;
-    int	start;
-    int	end;
-    int	i;
-    char	*new;
-    
-	start = start_of_string(s1,set);
-	end = end_of_string(s1,set);
+	int		total;
+	int		start;
+	int		end;
+	char	*new;
+
 	if (!s1)
 	{
-		new = malloc(1);
-		if (!new)
-			return(NULL);
-		new[0] = 0;
+		new = ft_strdup("");
+		return (NULL);
 	}
+	start = start_of_string(s1, set);
+	end = end_of_string(s1, set);
 	if (end <= start)
-        total = 0;
+		total = 0;
 	else
 		total = end - start;
 	new = (char *)malloc(total + 1);
 	if (!new)
-		return(NULL);
-	i = 0;
-	while (start <= end)
-	{
-		new[i] = s1[start];
-		i++;
-		start++;	
-	}
-	new[i] = 0;
+		return (NULL);
+	new = ft_substr(s1, start, total);
 	return (new);
 }

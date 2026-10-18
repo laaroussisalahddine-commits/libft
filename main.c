@@ -1,116 +1,193 @@
 
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 #include "libft.h"
 
-static int	check_split(char const *s, char c, char **expected)
-{
-	char	**result;
-	int		i;
-	int		ok;
+static int passed = 0;
+static int failed = 0;
 
-	result = ft_split(s, c);
-	if (!result)
-		return (0);
-	i = 0;
-	ok = 1;
-	while (expected[i] && result[i])
-	{
-		if (strcmp(result[i], expected[i]) != 0)
-			ok = 0;
-		i++;
-	}
-	if (expected[i] || result[i])
-		ok = 0;
-	i = 0;
-	while (result[i])
-		free(result[i++]);
-	free(result);
-	return (ok);
+static void test(const char *name, const char *s, char c,
+                 const char **expected, size_t count)
+{
+    char **result;
+    size_t i;
+    int ok;
+
+    result = ft_split(s, c);
+    ok = (result != NULL);
+    i = 0;
+    if (ok)
+    {
+        while (i < count)
+        {
+            if (!result[i] || strcmp(result[i], expected[i]) != 0)
+            {
+                ok = 0;
+                break;
+            }
+            i++;
+        }
+        if (ok && result[count] != NULL)
+            ok = 0;
+    }
+
+    printf("%s %-30s | separator=%d\n",
+        ok ? "✅ PASS" : "❌ FAIL", name, (unsigned char)c);
+
+    if (!ok)
+    {
+        printf("   Expected: ");
+        for (i = 0; i < count; i++)
+            printf("[%s] ", expected[i]);
+        printf("[NULL]\n   Got: ");
+
+        if (!result)
+            printf("NULL");
+        else
+        {
+            for (i = 0; i <= count && result[i]; i++)
+                printf("[%s] ", result[i]);
+            printf("[NULL]");
+        }
+        printf("\n");
+        failed++;
+    }
+    else
+        passed++;
+
+    if (result)
+    {
+        i = 0;
+        while (result[i])
+            free(result[i++]);
+        free(result);
+    }
 }
 
-int	main(void)
+#define TEST(name, s, c, ...) do {                         \
+    const char *e[] = {NULL, __VA_ARGS__};                 \
+    test(name, s, c, e + 1,                               \
+        sizeof(e) / sizeof(e[0]) - 1);                     \
+} while (0)
+
+int main(void)
 {
-	char	*e1[] = {"hello", NULL};
-	char	*e2[] = {"hello", "world", NULL};
-	char	*e3[] = {NULL};
-	char	*e4[] = {"a", "b", NULL};
-	char	*e5[] = {"a", "b", "c", NULL};
-	char	*e6[] = {"x", NULL};
-	char	*e7[] = {"123", "456", "789", NULL};
-	char	*e8[] = {"b", "n", "n", NULL};
-	char	*e9[] = {"abcdefghij", "klmnopqrst", NULL};
-	char	*e10[] = {"one", "two", "three", NULL};
-	char	*e11[] = {"UPPER", "lower", "Mixed", NULL};
-	char	*e12[] = {"alpha", "beta", "gamma", NULL};
-	char	*e13[] = {"start", "middle", "end", NULL};
-	char	*e14[] = {"a", "b", "c", "d", NULL};
-	char	*e15[] = {"hello", "42", NULL};
-	char	*e16[] = {"a", "b", NULL};
-	char	*e17[] = {"cat", "dog", NULL};
-	char	*e18[] = {"123", "45", "6", NULL};
-	char	*e19[] = {"red", "green", "blue", NULL};
-	char	*e20[] = {"libft", NULL};
+    /* 1. NORMAL CASES */
+    TEST("Two words", "hello world", ' ', "hello", "world");
+    TEST("Three words", "one two three", ' ',
+         "one", "two", "three");
+    TEST("Comma", "a,b,c", ',', "a", "b", "c");
+    TEST("Single word", "hello", ' ', "hello");
+    TEST("No delimiter", "abcdef", ',', "abcdef");
+    TEST("Single character", "a", ' ', "a");
 
-	printf("Test 01: %s\n",
-		check_split("", ' ', e3) ? "PASS" : "FAIL");
-	printf("Test 02: %s\n",
-		check_split("   ", ' ', e3) ? "PASS" : "FAIL");
-	printf("Test 03: %s\n",
-		check_split("hello", ' ', e1) ? "PASS" : "FAIL");
-	printf("Test 04: %s\n",
-		check_split("hello world", ' ', e2) ? "PASS" : "FAIL");
-	printf("Test 05: %s\n",
-		check_split("  hello   world  ", ' ', e2) ? "PASS" : "FAIL");
-	printf("Test 06: %s\n",
-		check_split(",a,b,", ',', e4) ? "PASS" : "FAIL");
-	printf("Test 07: %s\n",
-		check_split("a,,b,,,c", ',', e5) ? "PASS" : "FAIL");
-	printf("Test 08: %s\n",
-		check_split("x", ' ', e6) ? "PASS" : "FAIL");
-	printf("Test 09: %s\n",
-		check_split("x", 'x', e3) ? "PASS" : "FAIL");
-	printf("Test 10: %s\n",
-		check_split("123 456 789", ' ', e7) ? "PASS" : "FAIL");
-	printf("Test 11: %s\n",
-		check_split("banana", 'a', e8) ? "PASS" : "FAIL");
-	printf("Test 12: %s\n",
-		check_split("abcdefghij klmnopqrst", ' ', e9) ? "PASS" : "FAIL");
-	printf("Test 13: %s\n",
-		check_split("one,two,three,", ',', e10) ? "PASS" : "FAIL");
-	printf("Test 14: %s\n",
-		check_split("UPPER lower Mixed", ' ', e11) ? "PASS" : "FAIL");
-	printf("Test 15: %s\n",
-		check_split("alpha,beta,gamma", ',', e12) ? "PASS" : "FAIL");
-	printf("Test 16: %s\n",
-		check_split("start---middle---end", '-', e13)
-		? "PASS" : "FAIL");
-	printf("Test 17: %s\n",
-		check_split("a-b-c-d", '-', e14) ? "PASS" : "FAIL");
-	printf("Test 18: %s\n",
-		check_split("hello 42", ' ', e15) ? "PASS" : "FAIL");
-	printf("Test 19: %s\n",
-		check_split("a\tb", '\t', e16) ? "PASS" : "FAIL");
-	printf("Test 20: %s\n",
-		check_split("cat dog", ' ', e17) ? "PASS" : "FAIL");
-	printf("Test 21: %s\n",
-		check_split("123045006", '0', e18) ? "PASS" : "FAIL");
-	printf("Test 22: %s\n",
-		check_split("red,green,blue", ',', e19) ? "PASS" : "FAIL");
-	printf("Test 23: %s\n",
-		check_split("libft", ',', e20) ? "PASS" : "FAIL");
-	printf("Test 24: %s\n",
-		check_split(",,,,", ',', e3) ? "PASS" : "FAIL");
-	printf("Test 25: %s\n",
-		check_split(":::::", ':', e3) ? "PASS" : "FAIL");
-	printf("Test 26: %s\n",
-		check_split("  a  b  ", ' ', e4) ? "PASS" : "FAIL");
-	printf("Test 27: %s\n",
-		check_split("a\nb", '\n', e16) ? "PASS" : "FAIL");
-	printf("Test 28: %s\n",
-		check_split("a/b//c", '/', e5) ? "PASS" : "FAIL");
-	printf("Test 29: %s\n",
-		check_split("a;b;;c", ';', e5) ? "PASS" : "FAIL");
-	printf("Test 30: %s\n",
-		check_split("a+b++c", '+', e5) ? "PASS" : "FAIL");
+    /* 2. EMPTY STRINGS */
+    TEST("Empty string", "", ' ');
+    TEST("Empty delimiter zero", "", '\0');
+    TEST("Only space", " ", ' ');
+    TEST("Only spaces", "      ", ' ');
+    TEST("Only commas", ",,,,,", ',');
+    TEST("Only letters delimiter", "aaaa", 'a');
 
-	return (0);
+    /* 3. BOUNDARIES */
+    TEST("Leading delimiter", " hello", ' ', "hello");
+    TEST("Trailing delimiter", "hello ", ' ', "hello");
+    TEST("Both ends", " hello ", ' ', "hello");
+    TEST("Multiple leading", "   hello", ' ', "hello");
+    TEST("Multiple trailing", "hello   ", ' ', "hello");
+    TEST("Multiple both", "   hello   ", ' ', "hello");
+
+    /* 4. CONSECUTIVE DELIMITERS */
+    TEST("Double spaces", "hello  world", ' ',
+         "hello", "world");
+    TEST("Triple commas", "a,,,b", ',', "a", "b");
+    TEST("Many commas", ",,a,,b,,c,,", ',',
+         "a", "b", "c");
+    TEST("Alternating", "a,b,c,d", ',',
+         "a", "b", "c", "d");
+    TEST("One char words", "a b c", ' ', "a", "b", "c");
+
+    /* 5. DELIMITER CHARACTER */
+    TEST("Newline", "a\nb\nc", '\n', "a", "b", "c");
+    TEST("Tab", "a\tb\tc", '\t', "a", "b", "c");
+    TEST("Pipe", "a|b|c", '|', "a", "b", "c");
+    TEST("Digit", "a1b11c", '1', "a", "b", "c");
+    TEST("Letter", "hello", 'l', "he", "o");
+    TEST("Slash", "/usr/bin/", '/', "usr", "bin");
+    TEST("Asterisk", "***a**b***", '*', "a", "b");
+
+    /* 6. NULL DELIMITER */
+    TEST("Null delimiter", "hello world", '\0',
+         "hello world");
+    TEST("Null delimiter single", "A", '\0', "A");
+    TEST("Null delimiter spaces", "   ", '\0', "   ");
+
+    /* 7. SPACES PRESERVED */
+    TEST("Comma spaces", "a, b, c", ',',
+         "a", " b", " c");
+    TEST("Tab not space", "a\tb c", ' ', "a\tb", "c");
+    TEST("Space not tab", "a b\tc", '\t', "a b", "c");
+
+    /* 8. EMBEDDED NULL */
+    TEST("Embedded NULL", "abc\0def", ' ', "abc");
+    TEST("Delimiter after NULL", "abc\0,d", ',', "abc");
+
+    /* 9. EDGE CASES */
+    TEST("Delimiter beginning", "ahello", 'a', "hello");
+    TEST("Delimiter ending", "helloa", 'a', "hello");
+    TEST("Repeated characters", "abcabcabc", 'b',
+         "a", "ca", "ca", "c");
+    TEST("Internal spaces", "hello world,42 school", ',',
+         "hello world", "42 school");
+    TEST("One char between", ",a,b,c,", ',',
+         "a", "b", "c");
+    TEST("Different cases", "AaaA", 'a', "A", "A");
+
+    /* 10. LONG WORDS */
+    TEST("Long words", "abcdefghij klmnopqrst uvwxyz", ' ',
+         "abcdefghij", "klmnopqrst", "uvwxyz");
+    TEST("Many tokens", "1,2,3,4,5,6,7,8,9,10", ',',
+         "1", "2", "3", "4", "5",
+         "6", "7", "8", "9", "10");
+
+    /* 11. MEMORY INDEPENDENCE */
+    {
+        char s[] = "hello world";
+        char **result = ft_split(s, ' ');
+        int ok = (result && result[0] && result[1]
+            && !result[2]
+            && strcmp(result[0], "hello") == 0
+            && strcmp(result[1], "world") == 0);
+
+        if (ok)
+        {
+            s[0] = 'X';
+            ok = (strcmp(result[0], "hello") == 0);
+            result[0][0] = 'Z';
+            ok = ok && s[0] == 'X';
+        }
+
+        printf("%s Memory independence\n",
+            ok ? "✅ PASS" : "❌ FAIL");
+        if (ok)
+            passed++;
+        else
+            failed++;
+
+        if (result)
+        {
+            size_t i = 0;
+            while (result[i])
+                free(result[i++]);
+            free(result);
+        }
+    }
+
+    printf("\n====================================\n");
+    printf("✅ PASSED: %d\n", passed);
+    printf("❌ FAILED: %d\n", failed);
+    printf("TOTAL: %d\n", passed + failed);
+    printf("====================================\n");
+    return (failed != 0);
 }

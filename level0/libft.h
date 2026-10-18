@@ -6,7 +6,7 @@
 /*   By: slaarous <slaarous@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/13 21:58:11 by slaarous          #+#    #+#             */
-/*   Updated: 2026/10/16 22:52:24 by slaarous         ###   ########.fr       */
+/*   Updated: 2026/10/18 22:20:04 by slaarous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@
 # include <string.h>
 # include <stdlib.h>
 # include <stdio.h>
-#include <limits.h>
-#include <stdint.h>
+# include <limits.h>
+# include <stdint.h>
 
 // ----------Part 1------------ 
 //Character classification 
@@ -84,7 +84,7 @@ typedef struct s_list
 {
 	void	*content;
 	struct	s_list *next;
-} 	
+}
 t_list;
 
 //      linkd list :
