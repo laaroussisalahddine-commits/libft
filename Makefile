@@ -1,22 +1,22 @@
 LIB = libft.a
-FLAGS = -Wall -Wextra -Werror -I ./level0
+FLAGS = -Wall -Wextra -Werror
 CC = cc
 AR = ar rcs
 RM = rm -f
 
-FIlES = level1/ft_isalnum level1/ft_isalpha level1/ft_isascii level1/ft_isdigit level1/ft_isprint \
-		level2/ft_bzero level2/ft_memset level2/ft_strlen \
-		level3/ft_memcpy level3/ft_memmove \
-		level4/ft_memchr level4/ft_memcmp \
-		level5/ft_strchr level5/ft_strncmp level5/ft_strnstr level5/ft_strrchr \
-		level6/ft_strlcpy level6/ft_strlcat \
-		level7/ft_atoi level7/ft_tolower level7/ft_toupper \
-		level8/ft_calloc level8/ft_strdup \
-		level9/ft_strjoin level9/ft_strtrim level9/ft_substr level9/ft_itoa level9/ft_split \
-		level10/ft_putchar_fd level10/ft_putnbr_fd level10/ft_putendl_fd level10/ft_putstr_fd \
-			level10/ft_striteri level10/ft_strmapi \
-		linkd_list/ft_lstadd_back linkd_list/ft_lstadd_front linkd_list/ft_lstclear linkd_list/ft_lstdelone \
-		linkd_list/ft_lstiter linkd_list/ft_lstlast linkd_list/ft_lstmap linkd_list/ft_lstnew linkd_list/ft_lstsize
+FIlES = ft_isalnum ft_isalpha ft_isascii ft_isdigit ft_isprint \
+		ft_bzero ft_memset ft_strlen \
+		ft_memcpy ft_memmove \
+		ft_memchr ft_memcmp \
+		ft_strchr ft_strncmp ft_strnstr ft_strrchr \
+		ft_strlcpy ft_strlcat \
+		ft_atoi ft_tolower ft_toupper \
+		ft_calloc ft_strdup \
+		ft_strjoin ft_strtrim ft_substr ft_itoa ft_split \
+		ft_putchar_fd ft_putnbr_fd ft_putendl_fd ft_putstr_fd \
+		ft_striteri ft_strmapi \
+		ft_lstadd_back ft_lstadd_front ft_lstclear ft_lstdelone \
+		ft_lstiter ft_lstlast ft_lstmap ft_lstnew ft_lstsize
 
 OBJ = $(FIlES:=.o)
 
@@ -36,8 +36,3 @@ fclean : clean
 	$(RM) $(LIB)
 
 re: fclean all
-
-run :
-	$(CC) $(FLAGS) main.c libft.a -o test && ./test
-
-
