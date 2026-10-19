@@ -6,7 +6,7 @@ RM = rm -f
 
 FIlES = level1/ft_isalnum level1/ft_isalpha level1/ft_isascii level1/ft_isdigit level1/ft_isprint \
 		level2/ft_bzero level2/ft_memset level2/ft_strlen \
-		level3/ft_memcpy \
+		level3/ft_memcpy level3/ft_memmove \
 		level4/ft_memchr level4/ft_memcmp \
 		level5/ft_strchr level5/ft_strncmp level5/ft_strnstr level5/ft_strrchr \
 		level6/ft_strlcpy level6/ft_strlcat \

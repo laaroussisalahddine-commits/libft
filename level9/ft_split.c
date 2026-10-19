@@ -6,7 +6,7 @@
 /*   By: slaarous <slaarous@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/15 13:42:20 by slaarous          #+#    #+#             */
-/*   Updated: 2026/10/18 21:37:49 by slaarous         ###   ########.fr       */
+/*   Updated: 2026/10/19 11:32:52 by slaarous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,8 @@ static int	count_word(char const *s, char c)
 			count++;
 			while (s[i] && s[i] != c)
 				i++;
+			if (s[i] == '\0')
+				return (count);
 		}
 		i++;
 	}

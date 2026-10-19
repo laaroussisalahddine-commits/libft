@@ -6,7 +6,7 @@
 /*   By: slaarous <slaarous@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/13 21:58:11 by slaarous          #+#    #+#             */
-/*   Updated: 2026/10/18 22:20:04 by slaarous         ###   ########.fr       */
+/*   Updated: 2026/10/19 13:18:05 by slaarous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ void	ft_bzero(void *s, size_t n);
 
 /* Copying and moving memory */
 void	*ft_memcpy(void *dst, const void *src, size_t n);
+void	*ft_memmove(void *dst, const void *src, size_t len);
 
 /* Copying and searching memory */
 void	*ft_memchr(const void *s, int c, size_t n);
