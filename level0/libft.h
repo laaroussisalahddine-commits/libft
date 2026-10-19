@@ -6,7 +6,7 @@
 /*   By: slaarous <slaarous@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/13 21:58:11 by slaarous          #+#    #+#             */
-/*   Updated: 2026/10/16 22:52:24 by slaarous         ###   ########.fr       */
+/*   Updated: 2026/10/19 13:18:05 by slaarous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@
 # include <string.h>
 # include <stdlib.h>
 # include <stdio.h>
-#include <limits.h>
-#include <stdint.h>
+# include <limits.h>
+# include <stdint.h>
 
 // ----------Part 1------------ 
 //Character classification 
@@ -35,6 +35,7 @@ void	ft_bzero(void *s, size_t n);
 
 /* Copying and moving memory */
 void	*ft_memcpy(void *dst, const void *src, size_t n);
+void	*ft_memmove(void *dst, const void *src, size_t len);
 
 /* Copying and searching memory */
 void	*ft_memchr(const void *s, int c, size_t n);
@@ -84,7 +85,7 @@ typedef struct s_list
 {
 	void	*content;
 	struct	s_list *next;
-} 	
+}
 t_list;
 
 //      linkd list :

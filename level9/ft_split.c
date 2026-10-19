@@ -6,7 +6,7 @@
 /*   By: slaarous <slaarous@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/15 13:42:20 by slaarous          #+#    #+#             */
-/*   Updated: 2026/10/17 19:40:45 by slaarous         ###   ########.fr       */
+/*   Updated: 2026/10/19 11:32:52 by slaarous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 static int	len_word(char const *s, char c, int start);
 static int	count_word(char const *s, char c);
 static void	free_split(char **arr, int j);
-static int	append(char const *s, char **arr, int pos, int len);
 
 char	**ft_split(char const *s, char c)
 {
@@ -36,7 +35,8 @@ char	**ft_split(char const *s, char c)
 		while (s[pos] && s[pos] == c)
 			pos++;
 		len = len_word(s, c, pos);
-		if (!append(s, arr, pos, len))
+		arr[i] = ft_substr(s, pos, len);
+		if (!arr[i])
 		{
 			free_split(arr, i);
 			return (NULL);
@@ -46,14 +46,6 @@ char	**ft_split(char const *s, char c)
 	}
 	arr[i] = NULL;
 	return (arr);
-}
-
-static int	append(char const *s, char **arr, int pos, int len)
-{
-	arr[i] = ft_substr(s, pos, len);
-	if (!arr[i])
-		return (0);
-	return (1);
 }
 
 static int	count_word(char const *s, char c)
@@ -70,9 +62,10 @@ static int	count_word(char const *s, char c)
 			count++;
 			while (s[i] && s[i] != c)
 				i++;
+			if (s[i] == '\0')
+				return (count);
 		}
-		else
-			i++;
+		i++;
 	}
 	return (count);
 }

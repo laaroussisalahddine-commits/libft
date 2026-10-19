@@ -6,7 +6,7 @@
 /*   By: slaarous <slaarous@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/14 12:58:15 by slaarous          #+#    #+#             */
-/*   Updated: 2026/10/17 15:43:59 by slaarous         ###   ########.fr       */
+/*   Updated: 2026/10/18 15:40:37 by slaarous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,8 @@ char	*ft_itoa(int n)
 	new = (char *)malloc(len + 1);
 	if (!new)
 		return (NULL);
+	if (temp < 0)
+		temp = -temp;
 	i = len;
 	while (i > 0)
 	{

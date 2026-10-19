@@ -1,116 +1,215 @@
 
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 #include "libft.h"
 
-static int	check_split(char const *s, char c, char **expected)
-{
-	char	**result;
-	int		i;
-	int		ok;
+static int passed = 0;
+static int failed = 0;
 
-	result = ft_split(s, c);
-	if (!result)
-		return (0);
-	i = 0;
-	ok = 1;
-	while (expected[i] && result[i])
-	{
-		if (strcmp(result[i], expected[i]) != 0)
-			ok = 0;
-		i++;
-	}
-	if (expected[i] || result[i])
-		ok = 0;
-	i = 0;
-	while (result[i])
-		free(result[i++]);
-	free(result);
-	return (ok);
+static void report(const char *name, int ok)
+{
+    printf("%s %-35s\n", ok ? "✅ PASS" : "❌ FAIL", name);
+    if (ok)
+        passed++;
+    else
+        failed++;
 }
 
-int	main(void)
+/* Test two independent buffers */
+static void test_copy(const char *name, const void *src,
+    const void *initial, size_t size, size_t n)
 {
-	char	*e1[] = {"hello", NULL};
-	char	*e2[] = {"hello", "world", NULL};
-	char	*e3[] = {NULL};
-	char	*e4[] = {"a", "b", NULL};
-	char	*e5[] = {"a", "b", "c", NULL};
-	char	*e6[] = {"x", NULL};
-	char	*e7[] = {"123", "456", "789", NULL};
-	char	*e8[] = {"b", "n", "n", NULL};
-	char	*e9[] = {"abcdefghij", "klmnopqrst", NULL};
-	char	*e10[] = {"one", "two", "three", NULL};
-	char	*e11[] = {"UPPER", "lower", "Mixed", NULL};
-	char	*e12[] = {"alpha", "beta", "gamma", NULL};
-	char	*e13[] = {"start", "middle", "end", NULL};
-	char	*e14[] = {"a", "b", "c", "d", NULL};
-	char	*e15[] = {"hello", "42", NULL};
-	char	*e16[] = {"a", "b", NULL};
-	char	*e17[] = {"cat", "dog", NULL};
-	char	*e18[] = {"123", "45", "6", NULL};
-	char	*e19[] = {"red", "green", "blue", NULL};
-	char	*e20[] = {"libft", NULL};
+    unsigned char *mine;
+    unsigned char *original;
+    void *r1;
+    void *r2;
+    int ok;
 
-	printf("Test 01: %s\n",
-		check_split("", ' ', e3) ? "PASS" : "FAIL");
-	printf("Test 02: %s\n",
-		check_split("   ", ' ', e3) ? "PASS" : "FAIL");
-	printf("Test 03: %s\n",
-		check_split("hello", ' ', e1) ? "PASS" : "FAIL");
-	printf("Test 04: %s\n",
-		check_split("hello world", ' ', e2) ? "PASS" : "FAIL");
-	printf("Test 05: %s\n",
-		check_split("  hello   world  ", ' ', e2) ? "PASS" : "FAIL");
-	printf("Test 06: %s\n",
-		check_split(",a,b,", ',', e4) ? "PASS" : "FAIL");
-	printf("Test 07: %s\n",
-		check_split("a,,b,,,c", ',', e5) ? "PASS" : "FAIL");
-	printf("Test 08: %s\n",
-		check_split("x", ' ', e6) ? "PASS" : "FAIL");
-	printf("Test 09: %s\n",
-		check_split("x", 'x', e3) ? "PASS" : "FAIL");
-	printf("Test 10: %s\n",
-		check_split("123 456 789", ' ', e7) ? "PASS" : "FAIL");
-	printf("Test 11: %s\n",
-		check_split("banana", 'a', e8) ? "PASS" : "FAIL");
-	printf("Test 12: %s\n",
-		check_split("abcdefghij klmnopqrst", ' ', e9) ? "PASS" : "FAIL");
-	printf("Test 13: %s\n",
-		check_split("one,two,three,", ',', e10) ? "PASS" : "FAIL");
-	printf("Test 14: %s\n",
-		check_split("UPPER lower Mixed", ' ', e11) ? "PASS" : "FAIL");
-	printf("Test 15: %s\n",
-		check_split("alpha,beta,gamma", ',', e12) ? "PASS" : "FAIL");
-	printf("Test 16: %s\n",
-		check_split("start---middle---end", '-', e13)
-		? "PASS" : "FAIL");
-	printf("Test 17: %s\n",
-		check_split("a-b-c-d", '-', e14) ? "PASS" : "FAIL");
-	printf("Test 18: %s\n",
-		check_split("hello 42", ' ', e15) ? "PASS" : "FAIL");
-	printf("Test 19: %s\n",
-		check_split("a\tb", '\t', e16) ? "PASS" : "FAIL");
-	printf("Test 20: %s\n",
-		check_split("cat dog", ' ', e17) ? "PASS" : "FAIL");
-	printf("Test 21: %s\n",
-		check_split("123045006", '0', e18) ? "PASS" : "FAIL");
-	printf("Test 22: %s\n",
-		check_split("red,green,blue", ',', e19) ? "PASS" : "FAIL");
-	printf("Test 23: %s\n",
-		check_split("libft", ',', e20) ? "PASS" : "FAIL");
-	printf("Test 24: %s\n",
-		check_split(",,,,", ',', e3) ? "PASS" : "FAIL");
-	printf("Test 25: %s\n",
-		check_split(":::::", ':', e3) ? "PASS" : "FAIL");
-	printf("Test 26: %s\n",
-		check_split("  a  b  ", ' ', e4) ? "PASS" : "FAIL");
-	printf("Test 27: %s\n",
-		check_split("a\nb", '\n', e16) ? "PASS" : "FAIL");
-	printf("Test 28: %s\n",
-		check_split("a/b//c", '/', e5) ? "PASS" : "FAIL");
-	printf("Test 29: %s\n",
-		check_split("a;b;;c", ';', e5) ? "PASS" : "FAIL");
-	printf("Test 30: %s\n",
-		check_split("a+b++c", '+', e5) ? "PASS" : "FAIL");
+    if (n > size)
+    {
+        report(name, 0);
+        return;
+    }
+    mine = malloc(size ? size : 1);
+    original = malloc(size ? size : 1);
+    if (!mine || !original)
+    {
+        report(name, 0);
+        free(mine);
+        free(original);
+        return;
+    }
+    memcpy(mine, initial, size);
+    memcpy(original, initial, size);
 
-	return (0);
+    r1 = ft_memmove(mine, src, n);
+    r2 = memmove(original, src, n);
+
+    ok = (r1 == mine && r2 == original);
+    ok = ok && memcmp(mine, original, size) == 0;
+    report(name, ok);
+
+    free(mine);
+    free(original);
+}
+
+/* Test overlapping memory */
+static void test_overlap(const char *name, const void *initial,
+    size_t size, size_t dst, size_t src, size_t n)
+{
+    unsigned char *mine;
+    unsigned char *original;
+    void *r1;
+    void *r2;
+    int ok;
+
+    if (dst > size || src > size
+        || n > size - dst || n > size - src)
+    {
+        report(name, 0);
+        return;
+    }
+    mine = malloc(size ? size : 1);
+    original = malloc(size ? size : 1);
+    if (!mine || !original)
+    {
+        report(name, 0);
+        free(mine);
+        free(original);
+        return;
+    }
+    memcpy(mine, initial, size);
+    memcpy(original, initial, size);
+
+    r1 = ft_memmove(mine + dst, mine + src, n);
+    r2 = memmove(original + dst, original + src, n);
+
+    ok = (r1 == mine + dst && r2 == original + dst);
+    ok = ok && memcmp(mine, original, size) == 0;
+    report(name, ok);
+
+    if (!ok)
+    {
+        size_t i;
+        printf("   Expected: ");
+        for (i = 0; i < size; i++)
+            printf("%02X ", original[i]);
+        printf("\n   Got:      ");
+        for (i = 0; i < size; i++)
+            printf("%02X ", mine[i]);
+        printf("\n");
+    }
+    free(mine);
+    free(original);
+}
+
+int main(void)
+{
+    /* 1. NORMAL NON-OVERLAPPING CASES */
+    test_copy("Basic copy", "hello", "xxxxx", 5, 5);
+    test_copy("Partial copy", "hello", "xxxxx", 5, 3);
+    test_copy("One byte", "A", "X", 1, 1);
+    test_copy("Two bytes", "AB", "XX", 2, 2);
+    test_copy("Full including NULL", "hello", "xxxxxx", 6, 6);
+    test_copy("Numbers", "12345", "00000", 5, 5);
+    test_copy("Symbols", "!@#$%", "xxxxx", 5, 5);
+
+    /* 2. ZERO LENGTH */
+    test_copy("Zero length", "hello", "xxxxx", 5, 0);
+    test_copy("Zero empty", "", "", 1, 0);
+
+    /* 3. OVERLAP TO RIGHT: dst > src */
+    test_overlap("Right shift by 1", "abcdef", 7, 1, 0, 5);
+    test_overlap("Right shift by 2", "abcdef", 7, 2, 0, 4);
+    test_overlap("Right shift by 3", "abcdef", 7, 3, 0, 3);
+    test_overlap("Right shift including NULL", "abcdef",
+        7, 1, 0, 6);
+    test_overlap("Right shift 1 byte", "abcdef", 7, 1, 0, 1);
+    test_overlap("Right shift n=0", "abcdef", 7, 1, 0, 0);
+
+    /* 4. OVERLAP TO LEFT: dst < src */
+    test_overlap("Left shift by 1", "abcdef", 7, 0, 1, 5);
+    test_overlap("Left shift by 2", "abcdef", 7, 0, 2, 4);
+    test_overlap("Left shift by 3", "abcdef", 7, 0, 3, 3);
+    test_overlap("Left shift including NULL", "abcdef",
+        7, 0, 1, 6);
+    test_overlap("Left shift 1 byte", "abcdef", 7, 0, 1, 1);
+    test_overlap("Left shift n=0", "abcdef", 7, 0, 1, 0);
+
+    /* 5. SAME POINTER */
+    test_overlap("Same pointer full", "abcdef", 7, 0, 0, 7);
+    test_overlap("Same pointer partial", "abcdef", 7, 2, 2, 3);
+    test_overlap("Same pointer n=0", "abcdef", 7, 0, 0, 0);
+
+    /* 6. NON-OVERLAP INSIDE SAME BUFFER */
+    test_overlap("Separate regions forward", "abcdefghij",
+        11, 6, 0, 4);
+    test_overlap("Separate regions backward", "abcdefghij",
+        11, 0, 6, 4);
+    test_overlap("Adjacent regions", "abcdefghij",
+        11, 5, 0, 5);
+
+    /* 7. BINARY DATA + EMBEDDED NULL */
+    {
+        unsigned char data[] = {
+            0x00, 0x01, 0x7F, 0x80, 0xFE, 0xFF, 0x42, 0x00
+        };
+        unsigned char dst[8];
+
+        memset(dst, 0xAA, sizeof(dst));
+        test_copy("Binary data full", data, dst, 8, 8);
+        test_copy("Binary data partial", data, dst, 8, 5);
+        test_overlap("Binary overlap right", data, 8, 2, 0, 6);
+        test_overlap("Binary overlap left", data, 8, 0, 2, 6);
+        test_overlap("Binary same pointer", data, 8, 0, 0, 8);
+    }
+
+    /* 8. POINTER OFFSETS */
+    {
+        unsigned char data[] = {
+            10, 20, 30, 40, 50, 60, 70, 80
+        };
+        test_overlap("Offset right", data, 8, 3, 1, 4);
+        test_overlap("Offset left", data, 8, 1, 3, 4);
+        test_overlap("Offset no overlap", data, 8, 5, 0, 3);
+        test_overlap("Offset n=0", data, 8, 4, 2, 0);
+    }
+
+    /* 9. LONG BUFFERS */
+    {
+        unsigned char data[10000];
+        size_t i;
+
+        for (i = 0; i < sizeof(data); i++)
+            data[i] = (unsigned char)(i % 256);
+
+        test_overlap("Long right shift", data,
+            10000, 1, 0, 9999);
+        test_overlap("Long left shift", data,
+            10000, 0, 1, 9999);
+        test_overlap("Long middle overlap", data,
+            10000, 500, 0, 9000);
+        test_overlap("Long same pointer", data,
+            10000, 0, 0, 10000);
+        test_overlap("Long zero length", data,
+            10000, 500, 250, 0);
+    }
+
+    /* 10. INTEGER ARRAYS */
+    {
+        int data[] = {1, 2, 3, 4, 5, 6};
+        test_overlap("Integer array right", data,
+            sizeof(data), sizeof(int), 0, sizeof(int) * 5);
+        test_overlap("Integer array left", data,
+            sizeof(data), 0, sizeof(int), sizeof(int) * 5);
+    }
+
+    printf("\n====================================\n");
+    printf("✅ PASSED: %d\n", passed);
+    printf("❌ FAILED: %d\n", failed);
+    printf("TOTAL: %d\n", passed + failed);
+    printf("====================================\n");
+
+    return (failed != 0);
 }
