@@ -6,7 +6,7 @@
 /*   By: slaarous <slaarous@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/15 13:42:20 by slaarous          #+#    #+#             */
-/*   Updated: 2026/10/19 11:32:52 by slaarous         ###   ########.fr       */
+/*   Updated: 2026/10/19 15:15:05 by slaarous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,10 +37,7 @@ char	**ft_split(char const *s, char c)
 		len = len_word(s, c, pos);
 		arr[i] = ft_substr(s, pos, len);
 		if (!arr[i])
-		{
-			free_split(arr, i);
-			return (NULL);
-		}
+			return (free_split(arr, i), NULL);
 		pos += len;
 		i++;
 	}
