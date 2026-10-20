@@ -6,13 +6,13 @@
 /*   By: slaarous <slaarous@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/14 11:04:46 by slaarous          #+#    #+#             */
-/*   Updated: 2026/10/14 11:44:39 by slaarous         ###   ########.fr       */
+/*   Updated: 2026/10/20 10:21:34 by slaarous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_putlong(long n, int fd);
+static void	ft_putlong(long n, int fd);
 
 void	ft_putnbr_fd(int n, int fd)
 {
@@ -27,7 +27,7 @@ void	ft_putnbr_fd(int n, int fd)
 	ft_putlong(nb, fd);
 }
 
-void	ft_putlong(long n, int fd)
+static void	ft_putlong(long n, int fd)
 {
 	if (n >= 10)
 		ft_putlong(n / 10, fd);
