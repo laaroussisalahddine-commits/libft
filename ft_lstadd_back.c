@@ -6,7 +6,7 @@
 /*   By: slaarous <slaarous@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/15 18:28:22 by slaarous          #+#    #+#             */
-/*   Updated: 2026/10/15 21:10:36 by slaarous         ###   ########.fr       */
+/*   Updated: 2026/10/20 10:15:18 by slaarous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	ft_lstadd_back(t_list **lst, t_list *new)
 {
 	t_list	*current;
 
-	if (!*lst && !new)
+	if (!lst && !new)
 		return ;
 	if (!*lst)
 	{
