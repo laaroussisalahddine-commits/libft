@@ -88,7 +88,7 @@ static void	free_split(char **arr, int x)
 	while (i < x)
 	{
 		free(arr[i]);
-		i++; 
+		i++;
 	}
 	free(arr);
 }
