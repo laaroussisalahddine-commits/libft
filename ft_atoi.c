@@ -25,7 +25,7 @@ static int	ft_check_long(const char *str, int sign, int pos)
 		check = str[i] - '0';
 		if (sign == 1 && final_number > (9223372036854775807 - check) / 10)
 			return (-1);
-		else if (sign == -1 
+		else if (sign == -1
 			&& final_number > (9223372036854775807 - check + 1) / 10)
 			return (0);
 		final_number = final_number * 10 + check;
