@@ -26,7 +26,7 @@ all : $(LIB)
 $(LIB) : $(OBJ)
 	$(AR) $(LIB) $(OBJ)
 
-%.o:%.c 
+%.o:%.c libft.h
 	$(CC) $(FLAGS) -c $< -o $@
 	
 clean : 
