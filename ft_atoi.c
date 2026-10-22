@@ -6,7 +6,7 @@
 /*   By: slaarous <slaarous@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/13 21:44:25 by slaarous          #+#    #+#             */
-/*   Updated: 2026/10/19 15:29:03 by slaarous         ###   ########.fr       */
+/*   Updated: 2026/10/22 17:48:01 by slaarous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,22 +14,20 @@
 
 static int	ft_check_long(const char *str, int sign, int pos)
 {
-	long	final_number;
-	long	check;
-	int		i;
+	unsigned long	final_number;
+	unsigned long	check;
+	int				i;
 
 	i = pos;
 	final_number = 0;
 	while (ft_isdigit(str[i]))
 	{
-		check =  final_number * 10 + (str[i] - '0');
-		if (check > (9223372036854775807 - (str[i] - '0')) / 10)
-		{	if (sign == 1)
-				return (-1);
-			else if (sign == -1)
-				return (0);
-		} 
-		final_number = check;
+		check = str[i] - '0';
+		if (sign == 1 && final_number > (9223372036854775807 - check) / 10)
+			return (-1);
+		else if (sign == -1 && final_number > (9223372036854775807 - check + 1) / 10)
+			return (0);
+		final_number = final_number * 10 + check;
 		i++;
 	}
 	return (final_number * sign);
