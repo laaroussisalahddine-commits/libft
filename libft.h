@@ -6,7 +6,7 @@
 /*   By: slaarous <slaarous@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/13 21:58:11 by slaarous          #+#    #+#             */
-/*   Updated: 2026/10/22 17:50:51 by slaarous         ###   ########.fr       */
+/*   Updated: 2026/10/22 18:13:47 by slaarous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include <unistd.h>
 # include <stdlib.h>
+# include <stdint.h>
 
 // ----------Part 1------------
 //Character classification
