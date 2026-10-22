@@ -6,7 +6,7 @@
 /*   By: slaarous <slaarous@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/13 21:40:41 by slaarous          #+#    #+#             */
-/*   Updated: 2026/10/16 21:40:01 by slaarous         ###   ########.fr       */
+/*   Updated: 2026/10/22 17:50:34 by slaarous         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	*ft_calloc(size_t nmemb, size_t size)
 		size = 1;
 		nmemb = 1;
 	}
-	if (nmemb > SIZE_MAX / size) // remove sizemax
+	if (nmemb > 18446744073709551615 / size)
 		return (NULL);
 	total = nmemb * size;
 	s = malloc(total);
