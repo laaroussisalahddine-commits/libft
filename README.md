@@ -29,7 +29,6 @@ Other Makefile targets:
 make clean    # Remove object files
 make fclean   # Remove object files and libft.a
 make re       # Rebuild the library
-make bonus    # Build the bonus functions, if included in the Makefile
 ```
 
 To use the library in another C program, include `libft.h` and link the compiled library:
